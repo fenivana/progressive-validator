@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="../dist/TextInputValidator.js"></script>
+</head>
+
+<body>
+<p>Email: <input type="text" id="foo"> <span id="error-foo"></span></p>
+<p><button onclick="forceSetError()">force set error</button></p>
+
+<script>
+function isRegistered(email) {
+  // emulate a remote API call
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const registeredEmail = [
+        'foo@example.com',
+        'bar@example.com'
+      ]
+
+      resolve(registeredEmail.includes(email))
+    }, 300)
+  })
+}
+
+const validator = new TextInputValidator({
+  element: document.getElementById('foo'),
+
+  input: /(?!.*[-_.+@]{2,})(?!^[-_.+@])^[-_.+a-z0-9]+(@([-.a-z0-9]+)?)?$/i,
+
+  blur: function(email) {
+    return /(?!.*[-_.+@]{2,})(?!^[-_.+@])^[-_.+a-z0-9]+@[-.a-z0-9]+\.[a-z]+$/i.test(email) && isRegistered(email).then(reged => !reged || 'this email has been taken')
+  },
+
+  onValidityChange(valid) {
+    document.getElementById('error-foo').textContent = valid === true || valid === null ? '' : valid || 'invalid'
+  }
+})
+
+function forceSetError() {
+  validator.setValidity('force error')
+}
+</script>
+</body>
+</html>

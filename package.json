@@ -1,0 +1,53 @@
+{
+  "name": "text-input-validator",
+  "version": "0.1.1",
+  "description": "Progressive text input control validator",
+  "main": "dist/TextInputValidator.js",
+  "scripts": {
+    "build": "babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fenivana/text-input-validator.git"
+  },
+  "keywords": [
+    "text",
+    "form",
+    "validator"
+  ],
+  "author": "Jiang Fengming",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fenivana/text-input-validator/issues"
+  },
+  "homepage": "https://github.com/fenivana/text-input-validator#readme",
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-preset-env": "1.5.2",
+    "babel-preset-stage-2": "6.24.1",
+    "eslint": "3.19.0",
+    "eslint-config-enough": "0.2.6"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "loose": true,
+          "modules": "umd"
+        }
+      ],
+      "stage-2"
+    ],
+    "plugins": [
+      "add-module-exports"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "enough",
+    "env": {
+      "browser": true
+    }
+  }
+}
